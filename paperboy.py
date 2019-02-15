@@ -35,23 +35,42 @@ class Paperboy:
     def deliver(self,start_address,end_address):
         total_houses = end_address - start_address + 1
         curr_quota = self.quota()
-        if total_houses <= curr_quota:
-            earned = 0.25 * curr_quota
+        if total_houses == curr_quota:
+            earned = (0.25 * total_houses)
+        elif total_houses < curr_quota:
+            earned = (0.25 * total_houses) - 2
         elif total_houses > curr_quota:
             earned = (0.25 * curr_quota) + (0.50 * (total_houses-curr_quota))
         self.experience += total_houses
+        self.earnings += earned
         return earned
     # As a stretch exercise you can figure out how to ensure it still works if the above assumption isn't met!
 
+    # report
+    # This method should return a string about the paperboy's performance
+    # e.g. "I'm Tommy, I've delivered 90 papers and I've earned $38.25 so far!"
+    def report(self):
+        return "Look at me! I'm {} and I've delivered {} papers so far. They've paid me ${:.2f} for this, can you believe it?!".format(self.name,self.experience,self.earnings)
 
+# jeff = Paperboy('Jeff',3,4)
+# print(jeff)
+# print(jeff.quota())
+# print(jeff.deliver(1,49))
+# print(jeff.deliver(1,56))
+# print(jeff)
+# print(jeff.report())
+# print(jeff.deliver(1,100))
+# print(jeff.report())
+#
 
-# report
-# This method should return a string about the paperboy's performance
-# e.g. "I'm Tommy, I've delivered 90 papers and I've earned $38.25 so far!"
+tommy = Paperboy("Tommy")
 
-jeff = Paperboy('jeff',3,4)
-print(jeff)
-print(jeff.quota())
-print(jeff.deliver(1,49))
-print(jeff.deliver(1,56))
-print(jeff)
+print(tommy.quota()) #  50
+print(tommy.deliver(101, 160)) # 17.5
+print(tommy.earnings) # 17.5
+print(tommy.report()) # "I'm Tommy, I've delivered 60 papers and I've earned $17.5 so far!"
+
+print(tommy.quota()) # 80
+print(tommy.deliver(1, 75)) # 16.75
+print(tommy.earnings) # 34.25
+print(tommy.report()) # "I'm Tommy, I've been delivered 135 papers and I've earned $34.25 so far!"
