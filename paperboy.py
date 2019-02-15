@@ -12,12 +12,16 @@ class Paperboy:
 
     # Every day, each paperboy is given a house number to start at and a house number to finish at. They get paid $0.25 for every paper they deliver and $0.50
     #for every paper over their quota. If at the end of the day they haven't met their quota, they lose $2.
-#
-# The minimum number of papers to deliver is 50. The quota is calculated as half of your experience added to the minimum. So the first time a paperboy makes a delivery, the quota is 50. The next time, the quote is 50 plus half the number of papers that the paperboy has delivered in the past. In this way the quota should increase after every delivery the paperboy makes.
-#
-# Each paperboy should have at least these methods:
-#
-# __str__
+    #
+    # The minimum number of papers to deliver is 50. The quota is calculated as half of your experience added to the minimum. So the first time a paperboy
+    #makes a delivery, the quota is 50. The next time, the quote is 50 plus half the number of papers that the paperboy has delivered in the past. In this way
+    #the quota should increase after every delivery the paperboy makes.
+    #
+    # Each paperboy should have at least these methods:
+    #
+    # __str__
+    def __str__(self):
+        return "This paperboy is named {}. He has delivered {} papers and earned ${:.2f}.".format(self.name,self.experience,self.earnings)
 # quota
 # This method should calculate and return the paperboy's quota for his next delivery
 # deliver(self, start_address, end_address)
