@@ -22,9 +22,13 @@ class Paperboy:
     # __str__
     def __str__(self):
         return "This paperboy is named {}. He has delivered {} papers and earned ${:.2f}.".format(self.name,self.experience,self.earnings)
-# quota
-# This method should calculate and return the paperboy's quota for his next delivery
-# deliver(self, start_address, end_address)
+
+    # quota
+    # This method should calculate and return the paperboy's quota for his next delivery
+    def quota(self):
+        return (self.experience * 0.5 + 50)
+
+    # deliver(self, start_address, end_address)
 # This method will take two house numbers and return the amount of money earned on this delivery as a floating point number. It should also update the paperboy's experience!
 # Let's assume that the start_address is always a smaller number than the end_address
 # As a stretch exercise you can figure out how to ensure it still works if the above assumption isn't met!
@@ -34,3 +38,4 @@ class Paperboy:
 
 jeff = Paperboy('jeff',3,4)
 print(jeff)
+print(jeff.quota())
