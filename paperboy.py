@@ -3,6 +3,7 @@
 # Name
 # Experience (the number of papers they've delivered)
 # Earnings (amount of money they've earned)
+from math import floor
 class Paperboy:
 
     def __init__(self,name,exp=0,earnings=0):
@@ -26,12 +27,24 @@ class Paperboy:
     # quota
     # This method should calculate and return the paperboy's quota for his next delivery
     def quota(self):
-        return (self.experience * 0.5 + 50)
+        return floor(self.experience * 0.5 + 50)
 
     # deliver(self, start_address, end_address)
-# This method will take two house numbers and return the amount of money earned on this delivery as a floating point number. It should also update the paperboy's experience!
-# Let's assume that the start_address is always a smaller number than the end_address
-# As a stretch exercise you can figure out how to ensure it still works if the above assumption isn't met!
+    # This method will take two house numbers and return the amount of money earned on this delivery as a floating point number. It should also update the
+    #paperboy's experience! Let's assume that the start_address is always a smaller number than the end_address
+    def deliver(self,start_address,end_address):
+        total_houses = end_address - start_address + 1
+        curr_quota = self.quota()
+        if total_houses <= curr_quota:
+            earned = 0.25 * curr_quota
+        elif total_houses > curr_quota:
+            earned = (0.25 * curr_quota) + (0.50 * (total_houses-curr_quota))
+        self.experience += total_houses
+        return earned
+    # As a stretch exercise you can figure out how to ensure it still works if the above assumption isn't met!
+
+
+
 # report
 # This method should return a string about the paperboy's performance
 # e.g. "I'm Tommy, I've delivered 90 papers and I've earned $38.25 so far!"
@@ -39,3 +52,6 @@ class Paperboy:
 jeff = Paperboy('jeff',3,4)
 print(jeff)
 print(jeff.quota())
+print(jeff.deliver(1,49))
+print(jeff.deliver(1,56))
+print(jeff)
