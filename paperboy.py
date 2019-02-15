@@ -32,8 +32,12 @@ class Paperboy:
     # deliver(self, start_address, end_address)
     # This method will take two house numbers and return the amount of money earned on this delivery as a floating point number. It should also update the
     #paperboy's experience! Let's assume that the start_address is always a smaller number than the end_address
+    # As a stretch exercise you can figure out how to ensure it still works if the above assumption isn't met!
     def deliver(self,start_address,end_address):
-        total_houses = end_address - start_address + 1
+        #Added the following lines to ensure that it works even if the start address is larger than the end address
+        start = min(start_address,end_address)
+        end = max(start_address,end_address)
+        total_houses = end - start + 1
         curr_quota = self.quota()
         if total_houses == curr_quota:
             earned = (0.25 * total_houses)
@@ -44,7 +48,6 @@ class Paperboy:
         self.experience += total_houses
         self.earnings += earned
         return earned
-    # As a stretch exercise you can figure out how to ensure it still works if the above assumption isn't met!
 
     # report
     # This method should return a string about the paperboy's performance
@@ -66,7 +69,7 @@ class Paperboy:
 tommy = Paperboy("Tommy")
 
 print(tommy.quota()) #  50
-print(tommy.deliver(101, 160)) # 17.5
+print(tommy.deliver(160, 101)) # 17.5
 print(tommy.earnings) # 17.5
 print(tommy.report()) # "I'm Tommy, I've delivered 60 papers and I've earned $17.5 so far!"
 
