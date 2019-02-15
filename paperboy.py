@@ -1,11 +1,12 @@
-# Each paperboy should have several attributes:
-#
-# Name
-# Experience (the number of papers they've delivered)
-# Earnings (amount of money they've earned)
+
 from math import floor
 class Paperboy:
 
+    # Each paperboy should have several attributes:
+    #
+    # Name
+    # Experience (the number of papers they've delivered)
+    # Earnings (amount of money they've earned)
     def __init__(self,name,exp=0,earnings=0):
         self.name = name
         self.experience = exp
@@ -35,19 +36,19 @@ class Paperboy:
     # As a stretch exercise you can figure out how to ensure it still works if the above assumption isn't met!
     def deliver(self,start_address,end_address):
         #Added the following lines to ensure that it works even if the start address is larger than the end address
-        start = min(start_address,end_address)
-        end = max(start_address,end_address)
-        total_houses = end - start + 1
-        curr_quota = self.quota()
-        if total_houses == curr_quota:
-            earned = (0.25 * total_houses)
-        elif total_houses < curr_quota:
-            earned = (0.25 * total_houses) - 2
-        elif total_houses > curr_quota:
-            earned = (0.25 * curr_quota) + (0.50 * (total_houses-curr_quota))
-        self.experience += total_houses
-        self.earnings += earned
-        return earned
+        start = min(start_address,end_address)                                  #Find the smaller value
+        end = max(start_address,end_address)                                    #Find the larger value
+        total_houses = end - start + 1                                          #Total number of houses is the difference between them, plus one
+        curr_quota = self.quota()                                               #Define a local variable for the current quota
+        if total_houses == curr_quota:                                          #If the number of houses is the same as the quota,
+            earned = (0.25 * total_houses)                                      #The total earned is $0.25 per house
+        elif total_houses < curr_quota:                                         #If the number of houses is less than the current quota,
+            earned = (0.25 * total_houses) - 2                                  #Calculate how much they earned, then subtract $2.00
+        elif total_houses > curr_quota:                                         #If the number of houses is larger than the current quota,
+            earned = (0.25 * curr_quota) + (0.50 * (total_houses-curr_quota))   #Earn $0.25 per paper up to the quota, as well as $0.50 for each additional paper
+        self.experience += total_houses                                         #Add the number of houses to the experience
+        self.earnings += earned                                                 #Add today's earnings to the total earnings
+        return earned                                                           #Finally, return the earnings
 
     # report
     # This method should return a string about the paperboy's performance
